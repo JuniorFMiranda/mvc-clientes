@@ -1,21 +1,52 @@
-@Model IEnumerable<MvcClientes.Models.CLientes>
+@model IEnumerable<MvcClientes.Models.Cliente>
 
 @{
     ViewData["Titke"] = "Lista de clientes";
+
+    <style>
+        .MyHead{
+            background: #3e3e42;
+            color: white;
+        }
+    </style>
 }    
 
 <h1>Lista de clientes</h1>
 
+<a asp-action="Criar" value="Novo">Novo</a>
+
+</br>
+</br>
 </hr>
 
-<tabel>
-    <thead>
-
+<table class="table">
+    <thead class="MyHead">
+        <th>@Html.DisplayNameFor(x => x.Id)</th> 
+        <th>@Html.DisplayNameFor(x => x.Nome)</th>
+        <th>@Html.DisplayNameFor(x => x.Documento)</th>
+        <th>@Html.DisplayNameFor(x => x.Ativo)</th>
+        <th></th>
     </thead>
     <tbody>
-
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(x => item.Id)</td>
+                <td>@Html.DisplayFor(x => item.Nome)</td>
+                <td>@Html.DisplayFor(x => item.Documento)</td>
+                <td>@Html.DisplayFor(x => item.Ativo)</td>
+                <td>
+                    <a asp-action="Editar">Editar</a> |
+                    <a asp-action="Visualizar">Visualizar</a> |
+                    <a asp-action="Excluir">Excluir</a>
+                </td>
+            </tr>
+        }
     </tbody>
     <tfoot>
-        
-    </tfoot>
-</tabel>
+        <tr>
+            <td class="footer">Quantidade:</td>
+            <td>@Model.Count()</td>
+        </tr>
+    </tfoot> 
+</table>

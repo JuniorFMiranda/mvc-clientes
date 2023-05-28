@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MvcClientes.Context;
+using MvcClientes.Models;
 
 namespace MvcClientes.Controllers
 {
@@ -18,7 +19,22 @@ namespace MvcClientes.Controllers
 
         public IActionResult Index()
         {
+            var clientes = _context.Cliente.ToList();
+            return View(clientes);
+        }
+
+        public IActionResult Criar()
+        {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Criar(Cliente cliente)
+        {
+            _context.Cliente.Add(cliente);
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
