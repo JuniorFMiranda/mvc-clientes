@@ -1,0 +1,38 @@
+@model MvcClientes.Models.Cliente;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @{
+        ViewData["Title"] = "Exclusão de cliente";
+    }
+</head>
+<body>
+    <header>
+        <h2>@ViewData["Title"]</h2>
+        <p class="p-delete">Tem certeza de que deseja excluir definitivamente este cliente?</p>
+        <hr>
+    </header>
+    <main>
+        <form asp-action="Excluir">
+            <div>
+                <labeL asp-for="Nome">Nome</labeL></br>
+                <input type="text" asp-for="Nome" disabled></br>
+                <labeL asp-for="Documento">Documento</labeL></br>
+                <input type="text" asp-for="Documento" disabled></br>
+                <labeL asp-for="Ativo">Ativo</labeL>
+                <input type="checkbox" asp-for="Ativo" disabled/></br>
+                <labeL asp-for="LimiteCredito">Limite de crédito</labeL></br>
+                <input type="text" asp-for="LimiteCredito" disabled>
+            </div></br>
+            <div>
+                <button type="submit" class="button-delete">Excluir</button>
+                <button asp-action="Index">Voltar</button>
+            </div>
+        </form>
+    </main>
+</body>
+</html>

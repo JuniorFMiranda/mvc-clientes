@@ -39,3 +39,14 @@ button{
   background: #3e3e42;
   color: white;
 }
+
+.p-delete{
+  color: red;
+  font-size: 20px;
+}
+
+.button-delete{
+  background: red;
+  color: white;
+
+}

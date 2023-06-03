@@ -92,5 +92,26 @@ namespace MvcClientes.Controllers
 
             return View(cliente);
         }
+
+        public IActionResult Excluir(int id)
+        {
+            var cliente = _context.Cliente.Find(id);
+
+            return View(cliente);
+        }
+
+        [HttpPost]
+        public IActionResult Excluir(Cliente cliente)
+        {
+            var clienteDb = _context.Cliente.Find(cliente.Id);
+
+            if (clienteDb == null)
+                return RedirectToAction(nameof(Index));
+
+            _context.Cliente.Remove(clienteDb);
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
