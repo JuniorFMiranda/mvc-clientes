@@ -22,4 +22,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MvcClientes\MvcClientes.csproj" />
+  </ItemGroup>
+
 </Project>
