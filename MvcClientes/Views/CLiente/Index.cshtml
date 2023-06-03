@@ -34,9 +34,9 @@
                             <td>@Html.DisplayFor(x => item.Documento)</td>
                             <td>@Html.DisplayFor(x => item.Ativo)</td>
                             <td>
-                                <a asp-action="Editar">Editar</a> |
-                                <a asp-action="Visualizar" asp-route-id="@item.Id" >Visualizar</a> |
-                                <a asp-action="Excluir">Excluir</a>
+                                <a asp-action="Editar" asp-route-id="@item.Id">Editar</a> |
+                                <a asp-action="Visualizar" asp-route-id="@item.Id">Visualizar</a> |
+                                <a asp-action="Excluir" asp-route-id="@item.Id">Excluir</a>
                             </td>
                         </tr>
                     }

@@ -1,0 +1,48 @@
+@model MvcClientes.Models.Cliente;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @{
+        ViewData["Title"] = "Editando cliente";
+    }
+</head>
+<body>
+    <header>
+        <h2>@ViewData["Title"]</h2>
+    </header>
+    <main>
+        <form asp-action="Editar">
+            <fieldset>
+                <legend>Dados pessoais</legend>
+                <label asp-for="Nome">Nome</label></br>
+                <input type="text" asp-for="Nome"/></br>
+                <label asp-for="Documento">Documento</label></br>
+                <input type="text" asp-for="Documento"/>
+            </fieldset></br>   
+            <fieldset>
+                <legend>Outras informações</legend>
+                <label asp-for="Ativo">Ativo</label>
+                <input type="checkbox" asp-for="Ativo"/></br>
+                <label asp-for="LimiteCredito">Limite de crédito</label></br>
+                <input type="text" asp-for="LimiteCredito"/>
+            </fieldset></br>
+            <button type="submit">Salvar</button>
+            <button asp-action="Index">Cancelar</button>
+            <button type="reset">Limpar informações</button>
+            @if (ViewBag.Message != null)
+            {
+                <script>
+                   window.onsubmit = function()
+                   {
+                     alert("@ViewBag.Message")
+                   }
+                </script>    
+            }    
+        </form>
+    </main>
+</body>
+</html>

@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MvcClientes.Context;
 using MvcClientes.Models;
+using MvcClientes.Services;
 
 namespace MvcClientes.Controllers
 {
     public class ClienteController : Controller
     {
         private readonly ClienteDbContext _context;
+        private readonly string msg = "Informe o campo {0}!";
 
         public ClienteController(ClienteDbContext context)
         {
@@ -31,6 +33,18 @@ namespace MvcClientes.Controllers
         [HttpPost]
         public IActionResult Criar(Cliente cliente)
         {
+            if (ValidacoesCLiente.ValidarNomeVazio(cliente.Nome))
+            {
+                ViewBag.Message = string.Format(msg, "Nome");
+                return View();
+            }
+
+            if (ValidacoesCLiente.ValidarDocumentoVazio(cliente.Documento))
+            {
+                ViewBag.Message = string.Format(msg, "Documento");
+                return View();
+            }
+            
             _context.Cliente.Add(cliente);
             _context.SaveChanges();
 
@@ -47,6 +61,18 @@ namespace MvcClientes.Controllers
         [HttpPost]
         public IActionResult Editar(Cliente cliente)
         {
+            if (ValidacoesCLiente.ValidarNomeVazio(cliente.Nome))
+            {
+                ViewBag.Message = string.Format(msg, "Nome");
+                return View();
+            }
+
+            if (ValidacoesCLiente.ValidarDocumentoVazio(cliente.Documento))
+            {
+                ViewBag.Message = string.Format(msg, "Documento");
+                return View();
+            }
+            
             var clienteDb = _context.Cliente.Find(cliente.Id);
 
             clienteDb.Nome = cliente.Nome;
