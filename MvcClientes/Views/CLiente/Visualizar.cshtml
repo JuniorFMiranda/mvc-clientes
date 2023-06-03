@@ -1,0 +1,40 @@
+@model MvcClientes.Models.Cliente;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @{
+        ViewData["Title"] = "Visualizando cliente";
+    }
+</head>
+<body>
+    <div class="context">
+        <header>
+            <h2>@ViewData["Title"]</h2>
+        </header>
+        <main>
+            <form>
+                <fieldset>
+                    <legend>Dados pessoais</legend>
+                    
+                    <label asp-for="Nome">Nome:</label></br>
+                    <input type="text" asp-for="Nome" disabled/> </br> 
+                    <label asp-for="Documento">Documento</label></br>
+                    <input type="text" asp-for="Documento" disabled/>
+                </fieldset></br> 
+                <fieldset>
+                    <legend>Outras informações</legend>
+                    <label asp-for="Ativo">Ativo</label>
+                    <input type="checkbox" asp-for="Ativo" disabled/></br>
+                    <label asp-for="LimiteCredito">Limite de crédito</label></br>
+                    <input type="text" asp-for="LimiteCredito" disabled/>
+                </fieldset></br>
+                <button asp-action="Index">Voltar</button>
+            </form>    
+        </main>
+    </div>    
+</body>
+</html>

@@ -1,43 +1,41 @@
 @model MvcClientes.Models.Cliente
 
-@{
-    ViewData["Titke"] = "Cadastrando cliente";
-
-    <style>
-        button{
-            background-color: #3e3e42;
-            color: white;
-        }
-        legend{
-            background-color: #3e3e42;
-            color: white;
-            padding: 10x 5x;
-            border-radius: 10px 0;
-        }
-    </style>
-}    
-
-<h1>Cadastrando clientes</h1>
-
-<form asp-action="Criar">
-    <div>
-        <fieldset>
-            <legend>Dados Pessoais</legend>
-            <label asp-for="Nome">Nome</label></br>
-            <input type="text" asp-for="Nome"></br>
-            <label asp-for="Documento">CFP / CNPJ</label></br>
-            <input type="text" asp-for="Documento"/>
-        </fieldset>
-    </div></br>
-    <div>    
-        <fieldset>
-            <legend>Outras Informações</legend>
-            <label asp-for="Ativo">Ativo</label>
-            <input type="checkbox" asp-for="Ativo"></br>
-            <label asp-for="LimiteCredito">Limite de Crédito</label></br>
-            <input type="text" asp-for="LimiteCredito"/>
-        </fieldset> 
-    </div></br>
-    <button type="submit">Salvar</button></br></br>
-    <a asp-action="Index">Voltar</a>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @{
+        ViewData["Title"] = "Adicionando cliente";
+    }
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h2>@ViewData["Title"]</h2>        
+        </header>
+        <main>
+            <form asp-action="Criar"> 
+                <fieldset>
+                    <legend>Dados pessoais</legend>
+                    <label asp-for="Nome">Nome</label></br>
+                    <input type="text" asp-for="Nome"/> </br>
+                    <label asp-for="Documento">Documento</label></br>
+                    <input type="text" asp-for="Documento"/>
+                </fieldset></br> 
+                <fieldset>
+                    <legend>Outras informações</legend>
+                    <label asp-for="Ativo">Ativo</label>
+                    <input type="checkbox" asp-for="Ativo"/></br>
+                    <label asp-for="LimiteCredito"></label></br>
+                    <input type="text" asp-for="LimiteCredito"/>
+                </fieldset></br>
+                <button type="submit">Salvar</button>
+                <button asp-action="Index">Cancelar</button>
+                <button type="reset">Limpar informações</button>
+            </form>
+        </main>    
+    </div>
+</body>
+</html>

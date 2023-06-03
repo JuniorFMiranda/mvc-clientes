@@ -25,3 +25,17 @@ table thead{
   background: #3e3e42;
   color: white;
 }
+
+fieldset legend{
+  background-color: #3e3e42;
+  border-radius: 10px;
+  color: white;
+  padding-top: 2px;
+  padding-left: 10px;
+  padding-bottom: 2px;
+}
+
+button{
+  background: #3e3e42;
+  color: white;
+}

@@ -36,5 +36,35 @@ namespace MvcClientes.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Editar(int id)
+        {
+            var cliente = _context.Cliente.Find(id);
+            
+            return View(cliente);
+        }
+
+        [HttpPost]
+        public IActionResult Editar(Cliente cliente)
+        {
+            var clienteDb = _context.Cliente.Find(cliente.Id);
+
+            clienteDb.Nome = cliente.Nome;
+            clienteDb.Documento = cliente.Documento;
+            clienteDb.Ativo = cliente.Ativo;
+            clienteDb.LimiteCredito = cliente.LimiteCredito;
+
+            _context.Cliente.Update(clienteDb);
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Visualizar(int id)
+        {
+            var cliente = _context.Cliente.Find(id);
+
+            return View(cliente);
+        }
     }
 }
