@@ -9,19 +9,19 @@ using MvcClientes.Services;
 
 namespace MvcClientes.Controllers
 {
-    public class ClienteController : Controller
+    public class ClientesController : Controller
     {
         private readonly ClienteDbContext _context;
         private readonly string msg = "Informe o campo {0}!";
 
-        public ClienteController(ClienteDbContext context)
+        public ClientesController(ClienteDbContext context)
         {
             _context = context;
         }
 
         public IActionResult Index()
         {
-            var clientes = _context.Cliente.ToList();
+            var clientes = _context.Clientes.ToList();
             return View(clientes);
         }
 
@@ -45,7 +45,7 @@ namespace MvcClientes.Controllers
                 return View();
             }
             
-            _context.Cliente.Add(cliente);
+            _context.Clientes.Add(cliente);
             _context.SaveChanges();
 
             return RedirectToAction(nameof(Index));
@@ -53,7 +53,7 @@ namespace MvcClientes.Controllers
 
         public IActionResult Editar(int id)
         {
-            var cliente = _context.Cliente.Find(id);
+            var cliente = _context.Clientes.Find(id);
             
             return View(cliente);
         }
@@ -73,14 +73,14 @@ namespace MvcClientes.Controllers
                 return View();
             }
             
-            var clienteDb = _context.Cliente.Find(cliente.Id);
+            var clienteDb = _context.Clientes.Find(cliente.Id);
 
             clienteDb.Nome = cliente.Nome;
             clienteDb.Documento = cliente.Documento;
             clienteDb.Ativo = cliente.Ativo;
             clienteDb.LimiteCredito = cliente.LimiteCredito;
 
-            _context.Cliente.Update(clienteDb);
+            _context.Clientes.Update(clienteDb);
             _context.SaveChanges();
 
             return RedirectToAction(nameof(Index));
@@ -88,14 +88,14 @@ namespace MvcClientes.Controllers
 
         public IActionResult Visualizar(int id)
         {
-            var cliente = _context.Cliente.Find(id);
+            var cliente = _context.Clientes.Find(id);
 
             return View(cliente);
         }
 
         public IActionResult Excluir(int id)
         {
-            var cliente = _context.Cliente.Find(id);
+            var cliente = _context.Clientes.Find(id);
 
             return View(cliente);
         }
@@ -103,12 +103,12 @@ namespace MvcClientes.Controllers
         [HttpPost]
         public IActionResult Excluir(Cliente cliente)
         {
-            var clienteDb = _context.Cliente.Find(cliente.Id);
+            var clienteDb = _context.Clientes.Find(cliente.Id);
 
             if (clienteDb == null)
                 return RedirectToAction(nameof(Index));
 
-            _context.Cliente.Remove(clienteDb);
+            _context.Clientes.Remove(clienteDb);
             _context.SaveChanges();
 
             return RedirectToAction(nameof(Index));

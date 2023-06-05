@@ -14,6 +14,6 @@ namespace MvcClientes.Context
 
         }
 
-        public DbSet<Cliente> Cliente { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
     }
 }
