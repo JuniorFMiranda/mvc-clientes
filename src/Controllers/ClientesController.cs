@@ -9,6 +9,7 @@ using MvcClientes.Services;
 
 namespace MvcClientes.Controllers
 {
+    [Route("gestao-cliente")]
     public class ClientesController : Controller
     {
         private readonly ClienteDbContext _context;
@@ -18,13 +19,15 @@ namespace MvcClientes.Controllers
         {
             _context = context;
         }
-
+        
+        [Route("lista")]
         public IActionResult Index()
         {
             var clientes = _context.Clientes.ToList();
             return View(clientes);
         }
 
+        [Route("novo")]
         public IActionResult Criar()
         {
             return View();
@@ -51,6 +54,7 @@ namespace MvcClientes.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Route("editar/{id:int}")]
         public IActionResult Editar(int id)
         {
             var cliente = _context.Clientes.Find(id);
@@ -61,18 +65,7 @@ namespace MvcClientes.Controllers
         [HttpPost]
         public IActionResult Editar(Cliente cliente)
         {
-            if (ValidacoesCLiente.ValidarNomeVazio(cliente.Nome))
-            {
-                ViewBag.Message = string.Format(msg, "Nome");
-                return View();
-            }
-
-            if (ValidacoesCLiente.ValidarDocumentoVazio(cliente.Documento))
-            {
-                ViewBag.Message = string.Format(msg, "Documento");
-                return View();
-            }
-            
+                        
             var clienteDb = _context.Clientes.Find(cliente.Id);
 
             clienteDb.Nome = cliente.Nome;
@@ -86,6 +79,7 @@ namespace MvcClientes.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Route("visualizar/{id:int}")]
         public IActionResult Visualizar(int id)
         {
             var cliente = _context.Clientes.Find(id);
@@ -93,6 +87,7 @@ namespace MvcClientes.Controllers
             return View(cliente);
         }
 
+        [Route("Excluir/{id}")]
         public IActionResult Excluir(int id)
         {
             var cliente = _context.Clientes.Find(id);

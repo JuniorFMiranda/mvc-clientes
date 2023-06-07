@@ -6,7 +6,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<ClienteDbContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("Connection")));
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(); //adiciona o midleware mvc ao projeto
+builder.Services.AddSession(options => 
+{
+    options.IdleTimeout = TimeSpan.Zero;
+});
 
 var app = builder.Build();
 
