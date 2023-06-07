@@ -87,7 +87,7 @@ namespace MvcClientes.Controllers
             return View(cliente);
         }
 
-        [Route("Excluir/{id}")]
+        [Route("Excluir/{id:int}")]
         public IActionResult Excluir(int id)
         {
             var cliente = _context.Clientes.Find(id);
