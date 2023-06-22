@@ -17,22 +17,11 @@
         </header>
         <main>
             <form>
-                <fieldset>
-                    <legend>Dados pessoais</legend>
-                    
-                    <label asp-for="Nome">Nome:</label></br>
-                    <input type="text" asp-for="Nome" disabled/> </br> 
-                    <label asp-for="Documento">Documento</label></br>
-                    <input type="text" asp-for="Documento" disabled/>
-                </fieldset></br> 
-                <fieldset>
-                    <legend>Outras informações</legend>
-                    <label asp-for="Ativo">Ativo</label>
-                    <input type="checkbox" asp-for="Ativo" disabled/></br>
-                    <label asp-for="LimiteCredito">Limite de crédito</label></br>
-                    <input type="text" asp-for="LimiteCredito" disabled/>
-                </fieldset></br>
-                <button asp-action="Index">Voltar</button>
+                @await Html.PartialAsync("_Crud")
+                
+                <div class="form-group">
+                    <button asp-action="Index">Voltar</button>
+                </div>    
             </form>    
         </main>
     </div>    

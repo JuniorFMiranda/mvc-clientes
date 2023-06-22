@@ -18,17 +18,9 @@
     </header>
     <main>
         <form asp-action="Excluir">
-            <div>
-                <labeL asp-for="Nome">Nome</labeL></br>
-                <input type="text" asp-for="Nome" disabled></br>
-                <labeL asp-for="Documento">Documento</labeL></br>
-                <input type="text" asp-for="Documento" disabled></br>
-                <labeL asp-for="Ativo">Ativo</labeL>
-                <input type="checkbox" asp-for="Ativo" disabled/></br>
-                <labeL asp-for="LimiteCredito">Limite de crédito</labeL></br>
-                <input type="text" asp-for="LimiteCredito" disabled>
-            </div></br>
-            <div>
+            <partial name="_crud"/>
+           
+            <div class="form-group">
                 <button type="submit" class="button-delete">Excluir</button>
                 <button asp-action="Index">Voltar</button>
             </div>

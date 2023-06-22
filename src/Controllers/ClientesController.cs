@@ -9,17 +9,18 @@ using MvcClientes.Services;
 
 namespace MvcClientes.Controllers
 {
+    [Route("")]
     [Route("gestao-cliente")]
     public class ClientesController : Controller
     {
         private readonly ClienteDbContext _context;
-        private readonly string msg = "Informe o campo {0}!";
-
+    
         public ClientesController(ClienteDbContext context)
         {
             _context = context;
         }
         
+        [Route("")]
         [Route("lista")]
         public IActionResult Index()
         {
@@ -34,24 +35,18 @@ namespace MvcClientes.Controllers
         }
 
         [HttpPost]
+        [Route("novo")]
         public IActionResult Criar(Cliente cliente)
         {
-            if (ValidacoesCLiente.ValidarNomeVazio(cliente.Nome))
+            if (ModelState.IsValid)
             {
-                ViewBag.Message = string.Format(msg, "Nome");
-                return View();
+               _context.Clientes.Add(cliente);
+               _context.SaveChanges();
+
+               return RedirectToAction(nameof(Index));
             }
 
-            if (ValidacoesCLiente.ValidarDocumentoVazio(cliente.Documento))
-            {
-                ViewBag.Message = string.Format(msg, "Documento");
-                return View();
-            }
-            
-            _context.Clientes.Add(cliente);
-            _context.SaveChanges();
-
-            return RedirectToAction(nameof(Index));
+            return View(cliente);
         }
 
         [Route("editar/{id:int}")]
@@ -63,20 +58,25 @@ namespace MvcClientes.Controllers
         }
 
         [HttpPost]
+        [Route("editar/{id:int}")]
         public IActionResult Editar(Cliente cliente)
         {
-                        
             var clienteDb = _context.Clientes.Find(cliente.Id);
+            
+            if (ModelState.IsValid)
+            {
+                clienteDb.Nome = cliente.Nome;
+                clienteDb.Documento = cliente.Documento;
+                clienteDb.Ativo = cliente.Ativo;
+                clienteDb.LimiteCredito = cliente.LimiteCredito;
 
-            clienteDb.Nome = cliente.Nome;
-            clienteDb.Documento = cliente.Documento;
-            clienteDb.Ativo = cliente.Ativo;
-            clienteDb.LimiteCredito = cliente.LimiteCredito;
+                _context.Clientes.Update(clienteDb);
+                _context.SaveChanges();
 
-            _context.Clientes.Update(clienteDb);
-            _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
 
-            return RedirectToAction(nameof(Index));
+            return View(clienteDb);
         }
 
         [Route("visualizar/{id:int}")]
@@ -87,7 +87,7 @@ namespace MvcClientes.Controllers
             return View(cliente);
         }
 
-        [Route("Excluir/{id:int}")]
+         [Route("Excluir/{id:int}")]
         public IActionResult Excluir(int id)
         {
             var cliente = _context.Clientes.Find(id);
@@ -96,6 +96,7 @@ namespace MvcClientes.Controllers
         }
 
         [HttpPost]
+        [Route("Excluir/{id:int}")]
         public IActionResult Excluir(Cliente cliente)
         {
             var clienteDb = _context.Clientes.Find(cliente.Id);

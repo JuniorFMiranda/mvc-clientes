@@ -18,7 +18,7 @@ namespace MvcClientes.Models
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "Preencha o campo documento!")]
-        [RegularExpression(@"^[0-9]", ErrorMessage = "Formato inválido para o campo documento.")]
+        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Formato inválido para o campo documento.")]
         [StringLength(14, MinimumLength = 11, ErrorMessage = "O campo documento deve possuir entre 11 e 14 caracteres.")]
         public string Documento { get; set; }
         public bool Ativo { get; set; }

@@ -8,6 +8,7 @@ namespace MvcClientes.Models
 {
     public sealed class Cliente : Pessoa
     {
+        [Required(ErrorMessage = "Preencha o Limite de crédito!")]
         [Range(0, 5000, ErrorMessage = "O valor do limite de crédito deve estar dentro da faixa entre R$ 0.00 e R$ 5.000,00")]
         [Display(Name = "Limite de crédito")]
         public decimal LimiteCredito { get; set; }
